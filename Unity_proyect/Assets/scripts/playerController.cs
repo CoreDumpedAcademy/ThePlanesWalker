@@ -5,12 +5,14 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
+    Vector3 playerVelocity;
     bool onGroundSentinel;
     bool jumpingSentinel;
     bool bounceSentinel;
     float timeJumping;
     float timeBouncing;
     public SpriteRenderer sprite;
+    public float maxWalkSpeed = 2;
     public float impulse;
     public float retard;
     public float retardOnAir;
@@ -54,6 +56,13 @@ public class playerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
+
+        if (playerVelocity.x < 0)
+            sprite.flipX = true;
+        else if (playerVelocity.x > 0)
+            sprite.flipX = false;
+
         if (onGroundSentinel && Input.GetButton("Jump"))
         {
             onGroundSentinel = false;
