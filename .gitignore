@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Personal scene
+Assets/Scenes/PersonalScene.unity
+Assets/Scenes/PersonalScene.unity.meta
