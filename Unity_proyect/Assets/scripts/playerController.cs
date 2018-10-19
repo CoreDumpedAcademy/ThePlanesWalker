@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour
     float timeJumping;
     float timeBouncing;
     public SpriteRenderer sprite;
+    public Animator APlayer;
     public float maxWalkSpeed = 2;
     public float impulse;
     public float retard;
@@ -57,7 +58,8 @@ public class playerController : MonoBehaviour
     private void FixedUpdate()
     {
         playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
-
+        APlayer.SetFloat("Speed", Mathf.Abs(playerVelocity.x));
+   
         if (playerVelocity.x < 0)
             sprite.flipX = true;
         else if (playerVelocity.x > 0)
@@ -96,5 +98,6 @@ public class playerController : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpImpulse);
             }
         }
+        APlayer.SetBool("Grounded", onGroundSentinel);
     }
 }
