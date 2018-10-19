@@ -36,5 +36,4 @@ sysinfo.txt
 *.unitypackage
 
 # Personal scene
-Assets/Scenes/PersonalScene.unity*
-Assets/Scenes/PersonalScene.unity.meta*
+Personal*
