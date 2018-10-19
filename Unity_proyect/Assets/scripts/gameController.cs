@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
     public menuController Menu;
-    public GameObject Platforms;
-    public GameObject CoinPrefab;
     public Text Pointer;
     bool onPause;
     int points;
