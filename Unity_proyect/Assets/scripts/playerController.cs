@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class playerController : MonoBehaviour
     bool bounceSentinel;
     float timeJumping;
     float timeBouncing;
-    public SpriteRenderer sprite;
+    public SpriteRenderer heroSprite;
+    public GameObject targetSprite;
+    public GameObject targetSprite2;
     public Animator APlayer;
     public float maxWalkSpeed = 2;
     public float impulse;
     public float retard;
-    public float retardOnAir;
+    public float retardOnAirMultiplayer;
     public float jumpImpulse;
     public float minJump;
     public float maxJump;
@@ -55,15 +58,21 @@ public class playerController : MonoBehaviour
         bounceSentinel = false;
     }
 
+    private void Update()
+    {
+        targetSprite.transform.position = Input.mousePosition;
+        targetSprite2.transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+    }
+
     private void FixedUpdate()
     {
         playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
         APlayer.SetFloat("Speed", Mathf.Abs(playerVelocity.x));
    
         if (playerVelocity.x < 0)
-            sprite.flipX = true;
+            heroSprite.flipX = true;
         else if (playerVelocity.x > 0)
-            sprite.flipX = false;
+            heroSprite.flipX = false;
 
         if (onGroundSentinel && Input.GetButton("Jump"))
         {
@@ -90,8 +99,8 @@ public class playerController : MonoBehaviour
             }
             else
             {
-                rb.AddForce(vxMove * impulse * retardOnAir);
-                rb.AddForce(Vector2.right * rb.GetPointVelocity(this.transform.position) * -retard * retardOnAir);
+                rb.AddForce(vxMove * impulse);
+                rb.AddForce(Vector2.right * rb.GetPointVelocity(this.transform.position) * -retard * retardOnAirMultiplayer);
             }
             if ((jumpingSentinel || timeJumping + minJump > Time.time) && !(timeJumping + maxJump < Time.time))
             {

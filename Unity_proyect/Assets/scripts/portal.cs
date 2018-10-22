@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class portal : MonoBehaviour
 {
-    GameObject OtherPortal;
-
-    private void Awake()
-    {
-        OtherPortal = GameObject.Find("PortalExit");
-    }
+    public bool thisIsEntry;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.position = OtherPortal.transform.position;
+            collision.transform.position = GameObject.Find("PortalExit(Clone)").transform.position;
         }
     }
 }
