@@ -17,6 +17,7 @@ public class portal : MonoBehaviour
             Destroy(AditionalPortal);
         Destroy(this.gameObject);
         Spawner.EnableSpawnPoints();
+        Spawner.EnableEnterPortal();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

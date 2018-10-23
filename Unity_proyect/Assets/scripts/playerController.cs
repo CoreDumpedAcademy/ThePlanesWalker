@@ -52,6 +52,16 @@ public class playerController : MonoBehaviour
         aviableToSpawnPortals = true;
     }
 
+    public void EnableEnterPortal()
+    {
+        actualPortalState = "portalEnter";
+    }
+
+    public void EnableExitPortal()
+    {
+        actualPortalState = "portalExit";
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -80,7 +90,6 @@ public class playerController : MonoBehaviour
         targetCanvas.transform.position = mouseInCanvas;
         targetGame.transform.position = mouseInGame;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
-        Debug.Log(hit.collider.gameObject.tag);
         if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
             if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
             {
