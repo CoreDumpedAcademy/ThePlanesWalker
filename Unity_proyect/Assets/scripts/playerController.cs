@@ -10,11 +10,15 @@ public class playerController : MonoBehaviour
     bool onGroundSentinel;
     bool jumpingSentinel;
     bool bounceSentinel;
+    bool aviableToSpawnPortals;
     float timeJumping;
     float timeBouncing;
+    string actualPortalState;
     public SpriteRenderer heroSprite;
     public GameObject targetCanvas;
     public GameObject targetGame;
+    public GameObject PortalEnterPrefab;
+    public GameObject PortalExitPrefab;
     public Animator APlayer;
     public float maxWalkSpeed = 2;
     public float impulse;
@@ -25,6 +29,28 @@ public class playerController : MonoBehaviour
     public float maxJump;
     public float bounceForce;
     public float maxBouncing;
+
+    private void Start()
+    {
+        onGroundSentinel = false;
+        jumpingSentinel = false;
+        rb.freezeRotation = true;
+        bounceSentinel = false;
+        actualPortalState = "portalEnter";
+        aviableToSpawnPortals = true;
+        timeJumping = -minJump;
+        timeBouncing = -maxBouncing;
+    }
+
+    private void Awake()
+    {
+        rb = this.GetComponent<Rigidbody2D>();
+    }
+
+    public void EnableSpawnPoints()
+    {
+        aviableToSpawnPortals = true;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,21 +73,29 @@ public class playerController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        timeJumping = -minJump;
-        timeBouncing = -maxBouncing;
-        rb = this.GetComponent<Rigidbody2D>();
-        onGroundSentinel = false;
-        jumpingSentinel = false;
-        rb.freezeRotation = true;
-        bounceSentinel = false;
-    }
-
     private void Update()
     {
-        targetCanvas.transform.position = Input.mousePosition;
-        targetGame.transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+        Vector3 mouseInCanvas = Input.mousePosition;
+        Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+        targetCanvas.transform.position = mouseInCanvas;
+        targetGame.transform.position = mouseInGame;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
+        Debug.Log(hit.collider.gameObject.tag);
+        if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
+            if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
+            {
+                if (actualPortalState == "portalEnter")
+                {
+                    actualPortalState = "portalExit";
+                    Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                }
+                else if (actualPortalState == "portalExit")
+                {
+                    actualPortalState = "portalEnter";
+                    Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                    aviableToSpawnPortals = false;
+                }
+            }
     }
 
     private void FixedUpdate()
