@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class portal : MonoBehaviour
 {
-    public bool thisIsEntry;
+    targetManager tManager;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
+    {
+        tManager = GameObject.Find("TargetG").GetComponent<targetManager>();
+    }
+
+    public void DestroyPortals(GameObject AditionalPortal)
+    {
+        Destroy(AditionalPortal);
+        Destroy(this.gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.position = GameObject.Find("PortalExit(Clone)").transform.position;
+            tManager.EnableSpawnPoints();
+            GameObject PortalExit = GameObject.Find("PortalExit(Clone)");
+            if (PortalExit != null)
+            {
+                collision.transform.position = PortalExit.transform.position;
+                DestroyPortals(PortalExit);
+            }
         }
     }
 }

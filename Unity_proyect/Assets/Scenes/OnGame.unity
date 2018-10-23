@@ -271,9 +271,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 87306765}
-  - component: {fileID: 87306766}
   - component: {fileID: 87306768}
   - component: {fileID: 87306767}
+  - component: {fileID: 87306766}
   m_Layer: 0
   m_Name: TargetG
   m_TagString: Untagged
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 87306764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07cdd9aa285418e4bb329750a57bf3b2, type: 3}
+  m_Script: {fileID: 11500000, guid: c0f2b0ff393d4304cb38f3ba22c8bdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PortalEnterPrefab: {fileID: 1414774885330734, guid: 1e04ed6977c30e744902fc5656ded4b0,
@@ -444,22 +444,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 111118200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6e6009918c7924181ea8d8318603ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a03764bf3cbd69458d47ef88e2808a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroSprite: {fileID: 2106654864}
-  targetSprite: {fileID: 915505018}
-  targetSprite2: {fileID: 87306764}
+  targetCanvas: {fileID: 915505018}
+  targetGame: {fileID: 87306764}
   APlayer: {fileID: 2106654865}
   maxWalkSpeed: 2
-  impulse: 200
-  retard: 20
+  impulse: 150
+  retard: 15
   retardOnAirMultiplayer: 2
-  jumpImpulse: 250
+  jumpImpulse: 200
   minJump: 0.3
-  maxJump: 0.4
-  bounceForce: 10
-  maxBouncing: 0.2
+  maxJump: 0.5
+  bounceForce: 0
+  maxBouncing: 0.1
 --- !u!1 &120202940
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 120202940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec7cad73f14fdb4ba9fb4903da66ef5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c17512dc6683ef45b2202579e06b4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Menu: {fileID: 1303529561}
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 120202940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f992d578015900f4a97e6558892caa54, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c93cc223ee1cba46b8f34eec16957c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Menu: {fileID: 120202942}

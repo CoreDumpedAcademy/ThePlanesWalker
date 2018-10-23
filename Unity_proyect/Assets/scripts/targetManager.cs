@@ -2,32 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class portalSpawner : MonoBehaviour {
+public class targetManager : MonoBehaviour {
     public GameObject PortalEnterPrefab;
     public GameObject PortalExitPrefab;
-    bool aviableToShoot;
+    bool aviableToSpawnPortals;
+    bool onWall;
     string actualState;
 
     private void Start()
     {
         actualState = "portalEnter";
-        aviableToShoot = false;
+        onWall = false;
+        aviableToSpawnPortals = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void EnableSpawnPoints()
+    {
+        aviableToSpawnPortals = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Bouncer") || collision.gameObject.CompareTag("Ground"))
-            aviableToShoot = true;
+            onWall = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        aviableToShoot = false;
+        onWall = false;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && aviableToShoot)
+        if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && onWall)
         {
             if(actualState == "portalEnter")
             {
@@ -38,6 +45,7 @@ public class portalSpawner : MonoBehaviour {
             {
                 actualState = "portalEnter";
                 Instantiate(PortalExitPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+                aviableToSpawnPortals = false;
             }
         }
     }

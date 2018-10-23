@@ -13,8 +13,8 @@ public class playerController : MonoBehaviour
     float timeJumping;
     float timeBouncing;
     public SpriteRenderer heroSprite;
-    public GameObject targetSprite;
-    public GameObject targetSprite2;
+    public GameObject targetCanvas;
+    public GameObject targetGame;
     public Animator APlayer;
     public float maxWalkSpeed = 2;
     public float impulse;
@@ -60,8 +60,8 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
-        targetSprite.transform.position = Input.mousePosition;
-        targetSprite2.transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+        targetCanvas.transform.position = Input.mousePosition;
+        targetGame.transform.position = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
     }
 
     private void FixedUpdate()
