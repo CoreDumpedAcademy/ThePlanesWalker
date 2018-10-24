@@ -4,7 +4,6 @@ public class playerController : MonoBehaviour
 {
     Rigidbody2D rb;
     bool availableToSpawnPortals;
-
     bool groundFlag;
     bool jumpFlag;
     float xSpeed;
@@ -72,26 +71,36 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
+        // Try to place portal
+        if (Input.GetButtonDown("Fire1") && availableToSpawnPortals)
+        {
+            Vector2 rayPos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+                                         Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            RaycastHit2D hit = Physics2D.Raycast(rayPos, Vector2.zero, 0f);
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
+                {
+                    if (actualPortalState == "portalEnter")
+                    {
+                        actualPortalState = "portalExit";
+                        Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                    }
+                    else if (actualPortalState == "portalExit")
+                    {
+                        actualPortalState = "portalEnter";
+                        Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                        availableToSpawnPortals = false;
+                    }
+                }
+            }
+
+        }
+        // Target follows mouse
         Vector3 mouseInCanvas = Input.mousePosition;
         Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
         targetCanvas.transform.position = mouseInCanvas;
         targetGame.transform.position = mouseInGame;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
-        if (Input.GetButtonDown("Fire1") && availableToSpawnPortals && hit.collider != null)
-            if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
-            {
-                if (actualPortalState == "portalEnter")
-                {
-                    actualPortalState = "portalExit";
-                    Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
-                }
-                else if (actualPortalState == "portalExit")
-                {
-                    actualPortalState = "portalEnter";
-                    Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
-                    availableToSpawnPortals = false;
-                }
-            }
     }
 
     private void FixedUpdate()
