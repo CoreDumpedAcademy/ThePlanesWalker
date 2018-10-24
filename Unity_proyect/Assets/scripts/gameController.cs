@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
@@ -8,7 +6,6 @@ public class gameController : MonoBehaviour {
     public Text Pointer;
     bool onPause;
     int points;
-    float timeOnPause;
 
     public int GetPoints()
     {
@@ -21,19 +18,11 @@ public class gameController : MonoBehaviour {
         Pointer.text = "Points: " + points;
     }
 
-    public void PauseGame(bool value)
+    public void PauseGame()
     {
-        if (value != onPause)
-        {
-            Menu.EnableMenu(value);
-            if (onPause)
-                Time.timeScale = 1;
-            else
-            {
-                Time.timeScale = 0;
-            }
-            onPause = value;
-        }
+        Menu.EnableMenu(!onPause);
+        Time.timeScale = (onPause ? 1 : 0);
+        onPause = !onPause;
     }
 
     private void Awake()
@@ -46,8 +35,6 @@ public class gameController : MonoBehaviour {
     private void Update()
     {
         if (Input.GetButtonDown("Cancel"))
-        {
-            PauseGame(!onPause);
-        }
+            PauseGame();
     }
 }
