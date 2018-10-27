@@ -3139,7 +3139,7 @@ GameObject:
   - component: {fileID: 1981451950}
   - component: {fileID: 1981451951}
   m_Layer: 0
-  m_Name: Brick_Block
+  m_Name: blueportal_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3193,7 +3193,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e23b4779c0b9aa141b161a14399f6aa3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2fd5dbbf019ba14f8a46d224dfbdde0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3201,7 +3201,7 @@ SpriteRenderer:
   m_Size: {x: 17.54, y: 17.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2025529128
@@ -3344,7 +3344,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: c51f22bda57ee9f428a2e1f4a1f76e71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e705bb5886088dd459ca56a30c9626a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
