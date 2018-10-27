@@ -36,6 +36,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4285534578777444}
   - component: {fileID: 114442912241742082}
+  - component: {fileID: 114487321722502846}
+  - component: {fileID: 50866649373943120}
   m_Layer: 0
   m_Name: PortalEntry
   m_TagString: Untagged
@@ -70,6 +72,7 @@ Transform:
   m_Father: {fileID: 4285534578777444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 =======
 --- !u!50 &50866649373943120
 Rigidbody2D:
