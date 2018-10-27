@@ -9,10 +9,8 @@ public class playerController : MonoBehaviour
     Vector3 playerVelocity;
     bool onGroundSentinel;
     bool jumpingSentinel;
-    bool bounceSentinel;
     bool aviableToSpawnPortals;
     float timeJumping;
-    float timeBouncing;
     string actualPortalState;
     public SpriteRenderer heroSprite;
     public GameObject targetCanvas;
@@ -27,19 +25,15 @@ public class playerController : MonoBehaviour
     public float jumpImpulse;
     public float minJump;
     public float maxJump;
-    public float bounceForce;
-    public float maxBouncing;
 
     private void Start()
     {
         onGroundSentinel = false;
         jumpingSentinel = false;
         rb.freezeRotation = true;
-        bounceSentinel = false;
         actualPortalState = "portalEnter";
         aviableToSpawnPortals = true;
         timeJumping = -minJump;
-        timeBouncing = -maxBouncing;
     }
 
     private void Awake()
@@ -62,16 +56,11 @@ public class playerController : MonoBehaviour
         actualPortalState = "portalExit";
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGroundSentinel = true;
-        }
-        else if (collision.gameObject.CompareTag("Bouncer"))
-        {
-            timeBouncing = Time.time;
-            bounceSentinel = true;
         }
     }
 
@@ -123,33 +112,32 @@ public class playerController : MonoBehaviour
             timeJumping = Time.time;
             jumpingSentinel = true;
         }
+
         float xMove = Input.GetAxis("Horizontal");
         Vector2 vxMove = new Vector2(xMove, 0.0F);
         if (!Input.GetButton("Jump"))
         {
             jumpingSentinel = false;
         }
-        if (timeBouncing + maxBouncing < Time.time)
+
+        if (onGroundSentinel)
         {
-            bounceSentinel = false;
-        }
-        if (!bounceSentinel)
-        {
-            if (onGroundSentinel)
-            {
-                rb.AddForce(vxMove * impulse);
+            rb.AddForce(vxMove * impulse);
+            if (Mathf.Abs(rb.velocity.x) > gameController.Instance.XWorldScrollSpeed)
                 rb.AddForce(Vector2.right * rb.GetPointVelocity(this.transform.position) * -retard);
-            }
-            else
-            {
-                rb.AddForce(vxMove * impulse);
-                rb.AddForce(Vector2.right * rb.GetPointVelocity(this.transform.position) * -retard * retardOnAirMultiplayer);
-            }
-            if ((jumpingSentinel || timeJumping + minJump > Time.time) && !(timeJumping + maxJump < Time.time))
-            {
-                rb.AddForce(Vector2.up * jumpImpulse);
-            }
         }
+        else
+        {
+            rb.AddForce(vxMove * impulse);
+            if (Mathf.Abs(rb.velocity.x) > gameController.Instance.XWorldScrollSpeed)
+                rb.AddForce(Vector2.right * rb.GetPointVelocity(this.transform.position) * -retard * retardOnAirMultiplayer);
+        }
+
+        if ((jumpingSentinel || timeJumping + minJump > Time.time) && !(timeJumping + maxJump < Time.time))
+        {
+            rb.AddForce(Vector2.up * jumpImpulse);
+        }
+
         APlayer.SetBool("Grounded", onGroundSentinel);
     }
 }
