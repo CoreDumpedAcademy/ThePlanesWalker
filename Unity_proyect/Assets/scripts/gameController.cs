@@ -7,7 +7,7 @@ public class gameController : MonoBehaviour {
     public static gameController Instance;
     public menuController Menu;
     public Text Pointer;
-    public float XWorldScrollImpulse;
+    public float XWorldScrollSpeed;
     bool onPause;
     int points;
     float timeOnPause;

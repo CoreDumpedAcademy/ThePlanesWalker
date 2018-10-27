@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class worldScroller : MonoBehaviour
 {
-
     Rigidbody2D rigOfMine;
     void Awake()
     {
@@ -13,6 +12,6 @@ public class worldScroller : MonoBehaviour
 
     private void Start()
     {
-        rigOfMine.velocity = Vector2.left * gameController.Instance.XWorldScrollImpulse;
+        rigOfMine.velocity = Vector2.left * gameController.Instance.XWorldScrollSpeed;
     }
 }
