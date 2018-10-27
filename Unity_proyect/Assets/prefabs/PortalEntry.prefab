@@ -37,6 +37,8 @@ GameObject:
   - component: {fileID: 4285534578777444}
   - component: {fileID: 61072228823775898}
   - component: {fileID: 114442912241742082}
+  - component: {fileID: 114487321722502846}
+  - component: {fileID: 50866649373943120}
   m_Layer: 0
   m_Name: PortalEntry
   m_TagString: Untagged
@@ -71,6 +73,26 @@ Transform:
   m_Father: {fileID: 4285534578777444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50866649373943120
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414774885330734}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61072228823775898
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -105,6 +127,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35cfacbf66babfb4ca961ae7a50adf12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114487321722502846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414774885330734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639ab1e8d2694cc44ac0daf662f8d9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212262249029635360
