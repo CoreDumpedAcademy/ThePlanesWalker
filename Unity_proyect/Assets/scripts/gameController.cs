@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
-    public static gameController Instance;
     public menuController Menu;
     public Text Pointer;
-    public float XWorldScrollSpeed;
     bool onPause;
     int points;
     float timeOnPause;
@@ -40,13 +38,6 @@ public class gameController : MonoBehaviour {
 
     private void Awake()
     {
-        if (gameController.Instance == null)
-            gameController.Instance = this;
-        else if (gameController.Instance != this)
-        {
-            Destroy(gameObject);
-            Debug.Log("WARNING: gameController instanciado por 2a vez");
-        }
         onPause = false;
         points = 0;
         Pointer.text = "Points: " + points;
@@ -58,11 +49,5 @@ public class gameController : MonoBehaviour {
         {
             PauseGame(!onPause);
         }
-    }
-
-    private void OnDestroy()
-    {
-        if (gameController.Instance == this)
-            gameController.Instance = null;
     }
 }
