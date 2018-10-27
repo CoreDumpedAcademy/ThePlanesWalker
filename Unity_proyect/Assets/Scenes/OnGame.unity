@@ -624,8 +624,6 @@ MonoBehaviour:
   jumpImpulse: 200
   minJump: 0.3
   maxJump: 0.5
-  bounceForce: 0
-  maxBouncing: 0.1
 --- !u!1 &120202940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1484,7 @@ GameObject:
   - component: {fileID: 745574896}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Bouncer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
