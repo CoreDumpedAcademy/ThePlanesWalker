@@ -74,26 +74,30 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mouseInCanvas = Input.mousePosition;
-        Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
-        targetCanvas.transform.position = mouseInCanvas;
-        targetGame.transform.position = mouseInGame;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
-        if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
-            if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
-            {
-                if (actualPortalState == "portalEnter")
+        if (!MenuPausa.Pausado)
+        {
+            Vector3 mouseInCanvas = Input.mousePosition;
+            Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+            targetCanvas.transform.position = mouseInCanvas;
+            targetGame.transform.position = mouseInGame;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
+            if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
+                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
                 {
-                    actualPortalState = "portalExit";
-                    Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                    if (actualPortalState == "portalEnter")
+                    {
+                        actualPortalState = "portalExit";
+                        Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                    }
+                    else if (actualPortalState == "portalExit")
+                    {
+                        actualPortalState = "portalEnter";
+                        Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                        aviableToSpawnPortals = false;
+                    }
                 }
-                else if (actualPortalState == "portalExit")
-                {
-                    actualPortalState = "portalEnter";
-                    Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
-                    aviableToSpawnPortals = false;
-                }
-            }
+        }
+        
     }
 
     private void FixedUpdate()

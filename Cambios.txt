@@ -1,0 +1,6 @@
+Como soy un olvidadizo y al final se me va lo de hacer los commits cada poco, voy a explicar en este txt los cambios.
+Primero y lo más importante, se ha creado el menú principal de inicio de juego y el de pausa. El primero viene con las opciones "PLAY", la cual
+te envía a la escena de juego; "HighScores", en la cual solo se encuentra el botón para volver al menu principal; "Options", en la que solo hay
+ un botón para cambiar el volúmen, para cuando se le ponga música al juego; y "Quit", para salir de éste. El segundo tiene un botón para continuar,
+otro para reiniciar y otro para volver al menú. Para pausar el juego he tenido que cambiar en la creación de portales que solo se creen mientras no esté 
+pausado, ya que daba errores. Por último, se ha añadido TextMeshPro para la realización de los textos.
