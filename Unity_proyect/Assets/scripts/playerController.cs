@@ -74,7 +74,7 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
-        if (!MenuPausa.Pausado)
+        if (!MenuPausa.Pausado&&!DeathMenu.Muerto)
         {
             Vector3 mouseInCanvas = Input.mousePosition;
             Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);

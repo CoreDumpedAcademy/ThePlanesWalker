@@ -18,7 +18,7 @@ public class MenuPausa : MonoBehaviour
             {
                 Continuar();
             }
-            else
+            else if(!DeathMenu.Muerto)
             {
                 Pausar();
             }
