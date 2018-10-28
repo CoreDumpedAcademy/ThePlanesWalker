@@ -25,7 +25,6 @@ public class playerController : MonoBehaviour
     public float jumpImpulse;
     public float minJump;
     public float maxJump;
-    private gameController gameController;
 
     private void Start()
     {
@@ -35,11 +34,6 @@ public class playerController : MonoBehaviour
         actualPortalState = "portalEnter";
         aviableToSpawnPortals = true;
         timeJumping = -minJump;
-        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-        {
-            if (gameControllerObject != null) gameController = gameControllerObject.GetComponent<gameController>();
-            else Debug.Log("Cannot find a GameController reference");
-        }
     }
 
     private void Awake()
@@ -110,13 +104,11 @@ public class playerController : MonoBehaviour
     {
         playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
         APlayer.SetFloat("Speed", Mathf.Abs(playerVelocity.x));
-
+   
         if (playerVelocity.x < 0)
             heroSprite.flipX = true;
         else if (playerVelocity.x > 0)
             heroSprite.flipX = false;
-
-        gameController.UpdatePoints();
 
         if (onGroundSentinel && Input.GetButton("Jump"))
         {
@@ -148,10 +140,8 @@ public class playerController : MonoBehaviour
         if ((jumpingSentinel || timeJumping + minJump > Time.time) && !(timeJumping + maxJump < Time.time))
         {
             rb.AddForce(Vector2.up * jumpImpulse);
-            APlayer.SetBool("IsJumping", true);
         }
 
-        if (rb.velocity.y <= 0) APlayer.SetBool("IsJumping", false);
         APlayer.SetBool("Grounded", onGroundSentinel);
     }
 }
