@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
+
+    public int POINTS_MULTIPLIER = 8; // Controlls the amount fo points the user earns by frame
     public static gameController Instance;
     public Text Pointer;
     public float XWorldScrollSpeed;
