@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
 
-    public int POINTS_MULTIPLIER = 111; // readonly == java's final property, which means this is a constant
+    public int POINTS_MULTIPLIER = 8; // Controlls the amount fo points the user earns by frame
     public static gameController Instance;
     public menuController Menu;
     public Text pointsText;
