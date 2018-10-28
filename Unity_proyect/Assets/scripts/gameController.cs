@@ -4,23 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class gameController : MonoBehaviour {
+
+    public int POINTS_MULTIPLIER = 111; // readonly == java's final property, which means this is a constant
     public static gameController Instance;
     public menuController Menu;
-    public Text Pointer;
+    public Text pointsText;
     public float XWorldScrollSpeed;
     bool onPause;
-    int points;
+    public int points;
     float timeOnPause;
+
+    public void Start()
+    {
+        GameObject textObject = GameObject.FindGameObjectWithTag("scoreText");
+        if (textObject != null) pointsText = textObject.GetComponent<Text>();
+        else Debug.Log("ScoreText no encontrado");
+    }
 
     public int GetPoints()
     {
         return points;
     }
 
-    public void SetPoints(int value)
+    public void SetPoints(int totalPoints)
     {
-        points = value;
-        Pointer.text = "Points: " + points;
+        points = totalPoints;
+        pointsText.text = "Score: " + points;
+    }
+
+    public int UpdatePoints()
+    {
+        points = (int)(Time.timeSinceLevelLoad * POINTS_MULTIPLIER);
+        pointsText.text = "Score: " + points;
+        return points;
     }
 
     public void PauseGame(bool value)
@@ -48,8 +64,7 @@ public class gameController : MonoBehaviour {
             Debug.Log("WARNING: gameController instanciado por 2a vez");
         }
         onPause = false;
-        points = 0;
-        Pointer.text = "Points: " + points;
+        pointsText.text = "Score: " + points;
     }
 
     private void Update()
@@ -64,5 +79,6 @@ public class gameController : MonoBehaviour {
     {
         if (gameController.Instance == this)
             gameController.Instance = null;
+
     }
 }
