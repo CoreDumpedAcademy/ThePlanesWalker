@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - Bouncer
   - Death
-  - scoreText
   layers:
   - Default
   - TransparentFX
