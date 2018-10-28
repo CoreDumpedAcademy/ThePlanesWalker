@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: e21b6543f6c65a441a08ef591b36da3e
+guid: e9af509bb0ee5014f9a35b67927ed818
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Duck_0
+    21300000: portal_sprite_0
+    21300002: portal_sprite_1
+    21300004: portal_sprite_2
+    21300006: portal_sprite_3
+    21300008: portal_sprite_exit_0
+    21300010: portal_sprite_exit_1
+    21300012: portal_sprite_exit_2
+    21300014: portal_sprite_exit_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -32,7 +39,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -81,47 +88,85 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Duck_0
+      name: portal_sprite_exit_0
       rect:
         serializedVersion: 2
-        x: 1173
-        y: 23
-        width: 1146
-        height: 600
+        x: 207
+        y: 1289
+        width: 648
+        height: 677
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 538c649c926fa4b4aa027cfa06836ead
+      spriteID: 03d85e1f61232264badc7b100af9d03b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_sprite_exit_1
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1289
+        width: 648
+        height: 677
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19aa9fbb6afa444785d37135a10d695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_sprite_exit_2
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 207
+        width: 666
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc30f092be651984ead15b12d65ffa0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portal_sprite_exit_3
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 194
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff053618f9175dc43b40a8fdf5375501
       vertices: []
       indices: 
       edges: []
@@ -129,7 +174,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 13454f0da480adb46bd6a657078bb4de
+    spriteID: 87812db8b6ef98d4e81efdfe19857524
     vertices: []
     indices: 
     edges: []

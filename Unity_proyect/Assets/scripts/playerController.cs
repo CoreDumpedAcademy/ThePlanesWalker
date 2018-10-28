@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
-    Rigidbody2D rb;      //comment
+    Rigidbody2D rb;
     Vector3 playerVelocity;
     bool onGroundSentinel;
     bool jumpingSentinel;
@@ -25,6 +25,7 @@ public class playerController : MonoBehaviour
     public float jumpImpulse;
     public float minJump;
     public float maxJump;
+    private gameController gameController;
 
     private void Start()
     {
@@ -34,6 +35,11 @@ public class playerController : MonoBehaviour
         actualPortalState = "portalEnter";
         aviableToSpawnPortals = true;
         timeJumping = -minJump;
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        {
+            if (gameControllerObject != null) gameController = gameControllerObject.GetComponent<gameController>();
+            else Debug.Log("Cannot find a GameController reference");
+        }
     }
 
     private void Awake()
@@ -74,41 +80,39 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
-        if (!MenuPausa.Pausado&&!DeathMenu.Muerto)
-        {
-            Vector3 mouseInCanvas = Input.mousePosition;
-            Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
-            targetCanvas.transform.position = mouseInCanvas;
-            targetGame.transform.position = mouseInGame;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
-            if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
-                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
+        Vector3 mouseInCanvas = Input.mousePosition;
+        Vector2 mouseInGame = Vector2.Lerp(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), 1);
+        targetCanvas.transform.position = mouseInCanvas;
+        targetGame.transform.position = mouseInGame;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (mouseInGame - new Vector2(transform.position.x, transform.position.y)));
+        if (Input.GetButtonDown("Fire1") && aviableToSpawnPortals && hit.collider != null)
+            if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("Bouncer"))
+            {
+                if (actualPortalState == "portalEnter")
                 {
-                    if (actualPortalState == "portalEnter")
-                    {
-                        actualPortalState = "portalExit";
-                        Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
-                    }
-                    else if (actualPortalState == "portalExit")
-                    {
-                        actualPortalState = "portalEnter";
-                        Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
-                        aviableToSpawnPortals = false;
-                    }
+                    actualPortalState = "portalExit";
+                    Instantiate(PortalEnterPrefab, hit.point, Quaternion.Euler(0, 0, 0));
                 }
-        }
-        
+                else if (actualPortalState == "portalExit")
+                {
+                    actualPortalState = "portalEnter";
+                    Instantiate(PortalExitPrefab, hit.point, Quaternion.Euler(0, 0, 0));
+                    aviableToSpawnPortals = false;
+                }
+            }
     }
 
     private void FixedUpdate()
     {
         playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
         APlayer.SetFloat("Speed", Mathf.Abs(playerVelocity.x));
-   
+
         if (playerVelocity.x < 0)
             heroSprite.flipX = true;
         else if (playerVelocity.x > 0)
             heroSprite.flipX = false;
+
+        gameController.UpdatePoints();
 
         if (onGroundSentinel && Input.GetButton("Jump"))
         {
@@ -140,8 +144,10 @@ public class playerController : MonoBehaviour
         if ((jumpingSentinel || timeJumping + minJump > Time.time) && !(timeJumping + maxJump < Time.time))
         {
             rb.AddForce(Vector2.up * jumpImpulse);
+            APlayer.SetBool("IsJumping", true);
         }
 
+        if (rb.velocity.y <= 0) APlayer.SetBool("IsJumping", false);
         APlayer.SetBool("Grounded", onGroundSentinel);
     }
 }
