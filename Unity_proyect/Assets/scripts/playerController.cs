@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody2D rb;      //comment
     Vector3 playerVelocity;
     bool onGroundSentinel;
     bool jumpingSentinel;
