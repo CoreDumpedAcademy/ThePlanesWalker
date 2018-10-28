@@ -50,5 +50,7 @@ public class MenuPausa : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Pausado = false;
+        Time.timeScale = 1f;
     }
 }
